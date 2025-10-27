@@ -366,7 +366,7 @@
 
                 case ((requestQueryObj.location.trim() != "") && (queryResults != []) && (queryResults != undefined)):  /* Filter array by location */
                     if ((requestQueryObj.location.trim() != "") && (queryResults != [])) {
-                        queryResults = queryResults.filter((value) => { return value.location.succesfulDonation.search(requestQueryObj.location) != -1 });
+                        queryResults = queryResults.filter((value) => { return value.succesfulDonation.location.search(requestQueryObj.location) != -1 });
                     };
                     break;
 
