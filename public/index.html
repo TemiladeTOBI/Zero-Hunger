@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zero-Hunger</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body id="body" class="element">
+    <div id="navbar-wrapper">
+        <div id="navbar">
+            <div id="logo-wrapper" onmouseover="imgSwitch('navbar-logo','./logo/Zero-Hunger[blur].svg')"
+                onmouseout="imgSwitch('navbar-logo','./logo/Zero-Hunger[blue].svg')">
+                <a href="index.html">
+                    <img id="navbar-logo" src="./logo/Zero-Hunger[blue].svg" alt="Zero Hunger Logo">
+                </a>
+            </div>
+            <div id="trigger-div" onclick="toggleCollapsible()">
+                <button onmouseover="imgSwitch('trigger-img', './icon/heart[white].svg')"
+                    onmouseout="imgSwitch('trigger-img', './icon/heart.svg')">
+                    <img id="trigger-img" src="./icon/heart.svg" alt="White Heart">
+                </button>
+            </div>
+            <div id="collapsible-wrapper">
+                <div id="theme-div">
+                    <div class="element" onclick="switchTheme()">
+                        <button id="theme-btn" class="element"></button>
+                        <button class="underlay"></button>
+                    </div>
+                </div>
+                <div id="nav-link-wrapper">
+                    <div id="donate-request-wrapper">
+                        <div id="donate-wrapper" class="nav-link-wrapper" onclick="navDonate()"><a href="donate.html"
+                                class="nav-link">Donate
+                                Today</a></div>
+                        <div id="receive-wrapper" class="nav-link-wrapper" onclick="navRequest()"><a href="request.html"
+                                class="nav-link">Make a
+                                Request</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="hero" class="element">
+        <div id="hero-text-wrapper">
+            <h2>Help us put <em class="emphasis">an end to global starvation</em> - one meal at a time</h2>
+            <p>We, at Zero-Hunger, are at work, round the clock, ensuring your donations reach our less-priviledged
+                brethren
+                - one meal at a time, till there are no hungry stomachs left</p>
+        </div>
+        <div id="hero-img-wrapper">
+            <img id="hero-img" src="./logo/path90.png" alt="">
+        </div>
+    </div>
+
+    <div id="donate" class="element">
+        <div id="donate-img-wrapper">
+            <img src="./bg/anna-kovalevskaya-sketch-swamp-forest-vegetation-28-02-25.jpg" alt="">
+        </div>
+        <div id="donate-text-wrapper">
+            <p>With a few clicks, you too can put a smile on a face by sharing a meal with an hungry soul. Consider
+                donating today!</p>
+            <a id="donate-btn" href="donate.html">Donate</a>
+        </div>
+    </div>
+
+    <div id="receive" class="element">
+        <div id="receive-text-wrapper">
+            <p>Are you in dire need of a meal? With no food and nowhere to turn?
+                You don't have to go bed on an empty stomach tonight. Reach out to us today!
+            </p>
+            <a id="receive-btn" href="receive.html">Receive</a>
+        </div>
+        <div id="receive-img-wrapper">
+            <img src="./bg/anna-kovalevskaya-sketch-swamp-forest-vegetation-28-02-25.jpg" alt="">
+        </div>
+    </div>
+
+    <div id="modals">
+        <dialog id="sign-up-dialog" class="popover" onkeyup="escClose(event, hideDialog, 'sign-up-dialog')">
+            <div id="sign-up-header" class="popover-header">
+                <h2>Sign Up</h2>
+                <button onmouseover="crossHover('sign-in-button-cross')" onmouseout="crossReset('sign-in-button-cross')"
+                    onclick="hideDialog('sign-up-dialog')">
+                    <img id="sign-in-button-cross" src="./icon/cross.svg" alt="Cross button"
+                        onmouseover="crossHover('sign-in-button-cross')"
+                        onmouseout="crossReset('sign-in-button-cross')">
+                </button>
+            </div>
+            <div id="sign-up-body" class="popover-body">
+                <div>
+                    <!-- <div class="label-input-subdiv">
+                        <label for="sign-up-username">Username</label>
+                        <input id="sign-up-username" type="text" placeholder="Username"
+                            onkeyup="enterTrigger(event, signUserUp)">
+                    </div> -->
+                    <div class="label-input-subdiv">
+                        <label for="sign-up-email">Email</label>
+                        <input id="sign-up-email" type="text" placeholder="Email"
+                            onkeyup="enterTrigger(event, signUserUp)">
+                    </div>
+                    <div class="label-input-subdiv">
+                        <label for="sign-up-password">Password</label>
+                        <div class="password-wrapper">
+                            <button id="sign-in-password-btn" onclick="togglePassword('sign-up-password')">
+                                <img id="sign-up-password-icon" class="password-view" src="./icon/eye_closed.svg"
+                                    alt="Closed Eye">
+                            </button>
+                            <input id="sign-up-password" type="password" placeholder="Password"
+                                onkeyup="enterTrigger(event, signUserUp)">
+                        </div>
+                    </div>
+                    <div class="label-input-subdiv">
+                        <label for="sign-up-confirm">Confirm Password</label>
+                        <input id="sign-up-confirm" type="password" placeholder="Confirm Password"
+                            onkeyup="enterTrigger(event, signUserUp)">
+                    </div>
+                </div>
+                <p id="invalid-sign-up-details" class="invalid-details">Please ensure valid details!</p>
+                <p class="already-p">Already have an account? <a href="#"
+                        onclick="showDialog('sign-in-dialog','sign-up-dialog')">Log
+                        In!</a></p>
+            </div>
+            <div id="sign-up-btn-wrapper" class="popover-body-btn-wrapper">
+                <button id="sign-up-btn" onclick="signUserUp()">Sign Up</button>
+                <button id="sign-up-google-btn" onclick="signInGoogle()">Sign Up With Google</button>
+            </div>
+        </dialog>
+        <dialog id="sign-in-dialog" class="popover" onkeyup="escClose(event, hideDialog, 'sign-in-dialog')">
+            <div id="sign-in-header" class="popover-header">
+                <h2>Log In</h2>
+                <button onclick="hideDialog('sign-in-dialog')" onfocus="crossHover('sign-in-button-cross')"
+                    onblur="crossReset('sign-in-button-cross')">
+                    <img id="sign-in-button-cross" src="./icon/cross.svg" alt="Cross button">
+                </button>
+            </div>
+            <div id="sign-in-body" class="popover-body">
+                <p id="sign-up-success">Account created! Please log in</p>
+                <div>
+                    <!-- <div class="label-input-subdiv">
+                        <label for="sign-in-username">Username</label>
+                        <input id="sign-in-username" type="text" placeholder="Username"
+                            onkeyup="enterTrigger(event, LogUserIn)">
+                    </div> -->
+                    <div class="label-input-subdiv">
+                        <label for="sign-in-email">Email</label>
+                        <input id="sign-in-email" type="text" placeholder="Email"
+                            onkeyup="enterTrigger(event, LogUserIn)">
+                    </div>
+                    <div class="label-input-subdiv">
+                        <label for="sign-in-password">Password</label>
+                        <div class="password-wrapper">
+                            <button id="sign-in-password-btn" onclick="togglePassword('sign-in-password')">
+                                <img id="sign-in-password-icon" class="password-view" src="./icon/eye_closed.svg"
+                                    alt="Closed Eye">
+                            </button>
+                            <input id="sign-in-password" type="password" placeholder="Password"
+                                onkeyup="enterTrigger(event, LogUserIn)">
+                        </div>
+                    </div>
+                    <div class="label-input-subdiv">
+                        <label for="sign-in-confirm">Confirm Password</label>
+                        <input id="sign-in-confirm" type="password" placeholder="Confirm Password"
+                            onkeyup="enterTrigger(event, LogUserIn)">
+                    </div>
+                </div>
+                <p id="invalid-sign-in-details" class="invalid-details">Please ensure valid details!</p>
+                <p class="already-p">Don't have an account? <a href="#"
+                        onclick="showDialog('sign-up-dialog','sign-in-dialog')">Sign
+                        Up!</a></p>
+            </div>
+            <div id="sign-in-btn-wrapper" class="popover-body-btn-wrapper">
+                <button id="sign-in-btn" onclick="LogUserIn()">Log In</button>
+                <button id="sign-in-google-btn" onclick="signInGoogle()">Log In With Google</button>
+            </div>
+        </dialog>
+    </div>
+
+    <div id="further">
+        <ul>
+            <li class="ul-header">Know more about us</li>
+            <li><a href="">Our Logo</a></li>
+            <li><a href="">Our Mission</a></li>
+            <li><a href="">Our Vision</a></li>
+            <li><a href="">Our Partners</a></li>
+            <li><a href="">Testimonies</a></li>
+        </ul>
+        <ul>
+            <li class="ul-header">Take action</li>
+            <li><a href="donate.html">Donate</a></li>
+            <li><a href="request.html">Receive</a></li>
+        </ul>
+        <ul>
+            <li class="ul-header">Reach out to us</li>
+            <li><a href=""><span class="icon-span"></span>Twitter</a></li>
+            <li><a href=""><span class="icon-span"></span>Facebook</a></li>
+            <li><a href=""><span class="icon-span"></span>Instagram</a></li>
+            <li><a href=""><span class="icon-span"></span>YouTube</a></li>
+            <li><a href=""><span class="icon-span"></span>9gag</a></li>
+        </ul>
+    </div>
+
+    <footer>
+        2025 © Zero-Hunger
+    </footer>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Authentication
+        import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyAd4UJcWg4hMkvWCFS2LB_f5J0X_eKuAX4",
+            authDomain: "zero-hunger-b8414.firebaseapp.com",
+            projectId: "zero-hunger-b8414",
+            storageBucket: "zero-hunger-b8414.firebasestorage.app",
+            messagingSenderId: "361960148895",
+            appId: "1:361960148895:web:30eb932276b7c4e3a237aa",
+            measurementId: "G-HJST5LWVV6",
+            databaseURL: "https://zero-hunger-b8414-default-rtdb.firebaseio.com/"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+        // Auth
+        const provider = new GoogleAuthProvider();
+        const auth = getAuth();
+        let currentUser;
+
+        const signUserUp = () => {
+            const signUpEmail = document.getElementById('sign-up-email');
+            const signUpPassword = document.getElementById('sign-up-password');
+            const signUpConfirm = document.getElementById('sign-up-confirm');
+
+            if ((signUpPassword.value == signUpConfirm.value) &&
+                ((signUpEmail.value != "") && (signUpPassword.value != ""))
+            ) {
+                const email = signUpEmail.value; const password = signUpPassword.value;
+                createUserWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                        // Signed up 
+                        const user = userCredential.user;
+                        window.location.href = "index.html";
+                        // ...
+                    })
+                    .catch((error) => {
+                        const errorCode = error.code;
+                        const errorMessage = error.message;
+                        console.log(errorCode, errorMessage);
+                        // ..
+                    });
+            } else {
+                document.getElementById("invalid-sign-up-details").style.display = "flex";
+            }
+        }
+
+        const logUserIn = () => {
+            const signInEmail = document.getElementById('sign-in-email');
+            const signInPassword = document.getElementById('sign-in-password');
+            const signInConfirm = document.getElementById('sign-in-confirm');
+
+            if ((signInPassword.value == signInConfirm.value) &&
+                ((signInEmail.value != "") && (signInPassword.value != ""))
+            ) {
+                signInWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                        // Signed in 
+                        const user = userCredential.user;
+                        console.log("logged in");
+                        window.location.href = "index.html";
+                        // ...
+                    })
+                    .catch((error) => {
+                        const errorCode = error.code;
+                        const errorMessage = error.message;
+                        console.log(errorCode, errorMessage);
+                    });
+            } else {
+                document.getElementById("invalid-sign-in-details").style.display = "flex";
+            }
+        }
+
+        const signUpGoogle = () => {
+            signInWithPopup(auth, provider)
+                .then((result) => {
+                    // This gives you a Google Access Token. You can use it to access the Google API.
+                    const credential = GoogleAuthProvider.credentialFromResult(result);
+                    const token = credential.accessToken;
+                    // The signed-in user info.
+                    const user = result.user;
+
+                    if (user) {
+                        var userFirebase = user;
+                        console.log(userFirebase);
+
+                        hideDialog("sign-up-dialog");
+                        showDialog("sign-in-dialog", "sign-up-dialog"); /* Redirect to Log-In */
+                        setTimeout(() => { document.getElementById("sign-up-success").style.display = "flex" }, 250);
+                    } else { }
+                    // IdP data available using getAdditionalUserInfo(result)
+                    // ...
+                }).catch((error) => {
+                    // Handle Errors here.
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    // The email of the user's account used.
+                    const email = error.customData.email;
+                    // The AuthCredential type that was used.
+                    const credential = GoogleAuthProvider.credentialFromError(error);
+                    // ...
+                });
+        };
+
+        const signUserOut = () => {
+            signOut(auth).then(() => {
+                // Sign-out successful.
+                window.location.href = "index.html";
+            }).catch((error) => {
+                // An error happened.
+                console.log(error);
+            });
+        };
+
+        const checkCurrentUser = (() => {   /* Fetch Current User */
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    // User is signed in, see docs for a list of available properties
+                    // https://firebase.google.com/docs/reference/js/auth.user
+
+                    // const uid = user.uid;
+                    currentUser = user;
+                    loadUserNav();
+                    // ...
+                } else {
+                    // User is signed out
+                    console.log("No user!");
+                    loadUserNav();
+                    // ...
+                }
+            });
+        })();
+
+        const forceCurrentUser = () => {    /* Force-check User */
+            if (currentUser == "undefined") {
+                window.location.href = "index.html";
+                sessionStorage.redirectStatus = "true";
+            }
+        };
+
+        const redirectSignIn = (() => {  /* Display log-in modal after force-checking User */
+            if (sessionStorage.redirectStatus) {
+                showDialog("sign-in-dialog");
+                sessionStorage.removeItem("redirectStatus");
+            }
+        })();
+
+        const loadUserNav = () => { /* Check current user, to load navbar details */
+            const navLinkWrapper = document.getElementById("nav-link-wrapper");
+
+            if (currentUser != undefined) {
+                let avatarSrc;  /* User Avatar Image Source */
+                if ((currentUser.photoURL == "") || (currentUser.photoURL == undefined)) {
+                    avatarSrc = "./icon/heart.svg";
+                } else {
+                    avatarSrc = currentUser.photoURL;
+                }
+
+                // Load User Details
+                navLinkWrapper.innerHTML += `<div id="user-div" onmouseover="showPopunder('user-details-popunder')" onclick="showPopunder('user-details-popunder')">
+                <div id="user-details-popunder" class="popunder" onfocus="showPopunder('user-details-popunder')">
+                    <p class="popunder-mail"><b>Email: </b>${currentUser.email}</p>
+                    <p class="popunder-out"><a href="#" onclick="hidePopunder('user-details-popunder')"">Close</a>
+                    <a href="#" onclick="signUserOut()">Sign Out</a></p>
+                </div>
+                <div id="user-avatar-wrapper">
+                    <img src="${currentUser.photoURL}" alt="User Avatar">
+                </div>
+                <div id="user-details">
+                    <p id="user-name">${currentUser.displayName}</p>
+                    <p id="user-status"><span id="user-staus-icon"></span> Status</p>
+                </div>
+            </div>`
+            }
+            else {
+                console.log("No CurrentUser!");
+
+                // Load Sign-In/Log-In instead
+                navLinkWrapper.innerHTML += `<div id="sign-in-wrapper">
+                <button id="sign-in-button" onclick="showDialog('sign-up-dialog')">Sign In</button>
+            </div>`
+            }
+        };
+
+
+        window.signUserUp = signUserUp;
+        window.signUpGoogle = signUpGoogle;
+        window.signUserOut = signUserOut;
+        window.checkCurrentUser = checkCurrentUser;
+        window.forceCurrentUser = forceCurrentUser;
+        window.redirectSignIn = redirectSignIn;
+        window.loadUserNav = loadUserNav;
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>

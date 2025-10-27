@@ -1,4 +1,3 @@
-forceCurrentUser(); /* Force-check User */
 let pendingDonations = []   /* List of pending donations */
 
 
@@ -102,25 +101,25 @@ const pendingUpdate = () => {   /* Display pending donations */
     succesfulDonationsBtn.classList.remove("donation-active-btn");    /* "Deactivate" opposing button */
 }
 
-const succesfulUpdate = () => {   /* Display succesful donations */
-    donationsDisplay.innerHTML = "" /* Clear display */
+// const succesfulUpdate = () => {   /* Display succesful donations */
+//     donationsDisplay.innerHTML = "" /* Clear display */
 
-    for (let i = 0; i < succesfulDonations.length; i++) {
-        donationsDisplay = document.getElementById("donation-display"); /* Refresh HTML Element */
+//     for (let i = 0; i < succesfulDonations.length; i++) {
+//         donationsDisplay = document.getElementById("donation-display"); /* Refresh HTML Element */
 
-        donationsDisplay.innerHTML += `<div id="succesful${i}" class="donation-card">
-                                <p><b>Food Type: </b>${succesfulDonations[i].type}</p>
-                                <p><b>Unit Type: </b>${succesfulDonations[i].unit}</p>
-                                <p><b>Amount: </b>${succesfulDonations[i].amount}</p>
-                                <p><b>Pick-up Location: </b>${succesfulDonations[i].location}</p>
-                                <p><b>Additional Information: </b>${succesfulDonations[i].addInfo}</p>
-                            </div>`;
-    }
+//         donationsDisplay.innerHTML += `<div id="succesful${i}" class="donation-card">
+//                                 <p><b>Food Type: </b>${succesfulDonations[i].type}</p>
+//                                 <p><b>Unit Type: </b>${succesfulDonations[i].unit}</p>
+//                                 <p><b>Amount: </b>${succesfulDonations[i].amount}</p>
+//                                 <p><b>Pick-up Location: </b>${succesfulDonations[i].location}</p>
+//                                 <p><b>Additional Information: </b>${succesfulDonations[i].addInfo}</p>
+//                             </div>`;
+//     }
 
-    succesfulDonationsBtn = document.getElementById("succesful-donation-btn"); /* Refresh HTML Element */
-    succesfulDonationsBtn.classList.add("donation-active-btn");   /* Make button "active"*/
-    pendingDonationsBtn.classList.remove("donation-active-btn");    /* "Deactivate" opposing button */
-}
+//     succesfulDonationsBtn = document.getElementById("succesful-donation-btn"); /* Refresh HTML Element */
+//     succesfulDonationsBtn.classList.add("donation-active-btn");   /* Make button "active"*/
+//     pendingDonationsBtn.classList.remove("donation-active-btn");    /* "Deactivate" opposing button */
+// }
 
 
 
@@ -137,7 +136,7 @@ formReset();
 
 
 // Local storage Succesful donations
-let succesfulDonations = fetchSuccesfulDonations() /* Array intialization */
+// let succesfulDonations = fetchSuccesfulDonations() /* Array intialization */
 
 // Succesful donation class declaration
 class succesfulDonation {
@@ -150,21 +149,21 @@ class succesfulDonation {
     }
 }
 
-const submitPending = () => {   /* Submit pending donations */
-    if (pendingDonations.length != 0) {
-        for (let i = 0; i < pendingDonations.length; i++) {
-            const pendingDonation = pendingDonations[i];
+// const submitPending = () => {   /* Submit pending donations */
+//     if (pendingDonations.length != 0) {
+//         for (let i = 0; i < pendingDonations.length; i++) {
+//             const pendingDonation = pendingDonations[i];
 
-            const succesfulDonationObj = new succesfulDonation(pendingDonation.type, pendingDonation.unit, pendingDonation.amount, pendingDonation.location, pendingDonation.addInfo);
-            succesfulDonations.push(succesfulDonationObj);
-            localStorage.succesfulDonations = JSON.stringify(succesfulDonations);
-        }
+//             const succesfulDonationObj = new succesfulDonation(pendingDonation.type, pendingDonation.unit, pendingDonation.amount, pendingDonation.location, pendingDonation.addInfo);
+//             succesfulDonations.push(succesfulDonationObj);
+//             localStorage.succesfulDonations = JSON.stringify(succesfulDonations);
+//         }
 
-        succesfulUpdate();
+//         succesfulUpdate();
 
-        pendingDonations = [];  /* Empty pending array */
-        badgeClear("donations-badge");
-    } else {
-        console.log("No pending!");
-    }
-}
+//         pendingDonations = [];  /* Empty pending array */
+//         badgeClear("donations-badge");
+//     } else {
+//         console.log("No pending!");
+//     }
+// }

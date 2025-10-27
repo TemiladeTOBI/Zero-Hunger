@@ -370,12 +370,9 @@ textarea:focus {
 }
 
 #request-results-wrapper {
-    min-height: 85dvh;
+    height: 85dvh;
     max-height: 85dvh;
     overflow: auto;
-}
-
-#request-results-wrapper {
     align-items: first baseline;
     justify-content: left;
     padding: 0 1.5rem;

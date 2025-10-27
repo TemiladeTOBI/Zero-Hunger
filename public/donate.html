@@ -162,6 +162,193 @@
         2025 © Zero-Hunger
     </footer>
 
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Authentication
+        import { getAuth, onAuthStateChanged, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyAd4UJcWg4hMkvWCFS2LB_f5J0X_eKuAX4",
+            authDomain: "zero-hunger-b8414.firebaseapp.com",
+            projectId: "zero-hunger-b8414",
+            storageBucket: "zero-hunger-b8414.firebasestorage.app",
+            messagingSenderId: "361960148895",
+            appId: "1:361960148895:web:30eb932276b7c4e3a237aa",
+            measurementId: "G-HJST5LWVV6",
+            databaseURL: "https://zero-hunger-b8414-default-rtdb.firebaseio.com/"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+        // Auth
+        const provider = new GoogleAuthProvider();
+        const auth = getAuth();
+        let currentUser, currentUserUID;
+
+        const checkCurrentUser = (() => {   /* Fetch Current User */
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    // User is signed in, see docs for a list of available properties
+                    // https://firebase.google.com/docs/reference/js/auth.user
+
+                    currentUser = user;
+                    currentUserUID = user.uid;
+                    loadUserNav();
+                    fetchUserDonations();
+                    // ...
+                } else {
+                    // User is signed out
+                    console.log("No user!");
+                    forceCurrentUser();
+                    // ...
+                }
+            });
+        })();
+
+        const forceCurrentUser = () => {    /* Force-check User */
+            if (currentUser == undefined) {
+                window.location.href = "index.html";
+                sessionStorage.redirectStatus = "true";
+            }
+        };
+
+        const loadUserNav = () => { /* Check current user, to load navbar details */
+            const navLinkWrapper = document.getElementById("nav-link-wrapper");
+
+            if (currentUser != undefined) {
+                let avatarSrc;  /* User Avatar Image Source */
+                if ((currentUser.photoURL == "") || (currentUser.photoURL == undefined)) {
+                    avatarSrc = "./icon/heart.svg";
+                } else {
+                    avatarSrc = currentUser.photoURL;
+                }
+
+                // Load User Details
+                navLinkWrapper.innerHTML += `<div id="user-div" onmouseover="showPopunder('user-details-popunder')" onclick="showPopunder('user-details-popunder')">
+                <div id="user-details-popunder" class="popunder" onfocus="showPopunder('user-details-popunder')">
+                    <p class="popunder-mail"><b>Email: </b>${currentUser.email}</p>
+                    <p class="popunder-out"><a href="#" onclick="hidePopunder('user-details-popunder')"">Close</a>
+                    <a href="#" onclick="signUserOut()">Sign Out</a></p>
+                </div>
+                <div id="user-avatar-wrapper">
+                    <img src="${currentUser.photoURL}" alt="User Avatar">
+                </div>
+                <div id="user-details">
+                    <p id="user-name">${currentUser.displayName}</p>
+                    <p id="user-status"><span id="user-staus-icon"></span> Status</p>
+                </div>
+            </div>`
+            }
+            else {
+                console.log("No CurrentUser!");
+
+                // Load Sign-In/Log-In instead
+                navLinkWrapper.innerHTML += `<div id="sign-in-wrapper">
+                <button id="sign-in-button" onclick="showDialog('sign-up-dialog')">Sign In</button>
+            </div>`
+            }
+        };
+
+
+        window.checkCurrentUser = checkCurrentUser;
+        window.forceCurrentUser = forceCurrentUser;
+        window.loadUserNav = loadUserNav;
+
+
+        // Data
+        import { getDatabase, ref, set, child, push, onValue } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-database.js";
+
+        // Initialize Realtime Database and get a reference to the service
+        const database = getDatabase(app);
+        let succesfulDonations;
+
+        // Donations Display
+        const placeholderHTML = `<div id="placeholder-div">
+                                        <div>
+                                            <img id="placeholder-icon" src="./icon/heart.svg" alt="Loading Icon">
+                                        </div>
+                                        <p>Fetching...</p>
+                                    </div>`
+
+
+        const writeDonation = (donationObj) => {
+            const db = getDatabase();
+            set(push(ref(db, `Donations`)), {   /* Write donation to general DB */
+                succesfulDonation: donationObj
+            });
+            set(push(ref(db, `Donations-${currentUserUID}`)), {   /* Write donation to user DB */
+                succesfulDonation: donationObj
+            });
+        };
+
+        const submitPending = () => {   /* Submit pending donations */
+            if (pendingDonations.length != 0) {
+                for (let i = 0; i < pendingDonations.length; i++) {
+                    const pendingDonation = pendingDonations[i];
+
+                    const succesfulDonationObj = new succesfulDonation(pendingDonation.type, pendingDonation.unit, pendingDonation.amount, pendingDonation.location, pendingDonation.addInfo);
+                    writeDonation(succesfulDonationObj);
+                }
+
+                fetchUserDonations();
+                succesfulUpdate();
+
+                pendingDonations = [];  /* Empty pending array */
+                badgeClear("donations-badge");
+            } else {
+                console.log("No pending!");
+            }
+        }
+
+        const fetchUserDonations = () => {
+            const db = getDatabase();
+            onValue(ref(db, `Donations-${currentUserUID}`), (snapshot) => {
+                const data = snapshot.val();
+
+                succesfulDonations = Object.values(data);
+                console.log("fetchedUserDonations:", succesfulDonations);
+            });
+        };
+
+        const succesfulUpdate = () => {   /* Display succesful donations */
+            const donationsDisplay = document.getElementById("donation-display"); /* Refresh HTML Element */
+            donationsDisplay.innerHTML = placeholderHTML; /* Display placholder */
+            fetchUserDonations();
+
+            donationsDisplay.innerHTML = "";    /* Clear Display */
+            for (let i = 0; i < succesfulDonations.length; i++) {
+                const donationsDisplay = document.getElementById("donation-display"); /* Refresh HTML Element */
+
+                donationsDisplay.innerHTML += `<div id="succesful${i}" class="donation-card">
+                                <p><b>Food Type: </b>${succesfulDonations[i].succesfulDonation.type}</p>
+                                <p><b>Unit Type: </b>${succesfulDonations[i].succesfulDonation.unit}</p>
+                                <p><b>Amount: </b>${succesfulDonations[i].succesfulDonation.amount}</p>
+                                <p><b>Pick-up Location: </b>${succesfulDonations[i].succesfulDonation.location}</p>
+                                <p><b>Additional Information: </b>${succesfulDonations[i].succesfulDonation.addInfo}</p>
+                            </div>`;
+            }
+
+            const succesfulDonationsBtn = document.getElementById("succesful-donation-btn"); /* Refresh HTML Element */
+            succesfulDonationsBtn.classList.add("donation-active-btn");   /* Make button "active"*/
+            const pendingDonationsBtn = document.getElementById("pending-donation-btn");
+            pendingDonationsBtn.classList.remove("donation-active-btn");    /* "Deactivate" opposing button */
+        }
+
+
+        window.submitPending = submitPending;
+        window.fetchDonations = fetchDonations;
+        window.fetchUserDonations = fetchUserDonations;
+        window.succesfulUpdate = succesfulUpdate;
+    </script>
+
     <script src="script.js"></script>
     <script src="donate.js"></script>
 </body>
