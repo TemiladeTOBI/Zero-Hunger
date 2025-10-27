@@ -323,28 +323,35 @@
             donationsDisplay.innerHTML = placeholderHTML; /* Display placholder */
             fetchUserDonations();
 
-            donationsDisplay.innerHTML = "";    /* Clear Display */
-            for (let i = 0; i < succesfulDonations.length; i++) {
-                const donationsDisplay = document.getElementById("donation-display"); /* Refresh HTML Element */
+            if (succesfulDonations == undefined) {
+                setTimeout(() => {
+                    succesfulUpdate();
+                    console.log("Fetching...");
+                    
+                }, 1000);
+            } else {
+                donationsDisplay.innerHTML = "";    /* Clear Display */
+                for (let i = 0; i < succesfulDonations.length; i++) {
+                    const donationsDisplay = document.getElementById("donation-display"); /* Refresh HTML Element */
 
-                donationsDisplay.innerHTML += `<div id="succesful${i}" class="donation-card">
+                    donationsDisplay.innerHTML += `<div id="succesful${i}" class="donation-card">
                                 <p><b>Food Type: </b>${succesfulDonations[i].succesfulDonation.type}</p>
                                 <p><b>Unit Type: </b>${succesfulDonations[i].succesfulDonation.unit}</p>
                                 <p><b>Amount: </b>${succesfulDonations[i].succesfulDonation.amount}</p>
                                 <p><b>Pick-up Location: </b>${succesfulDonations[i].succesfulDonation.location}</p>
                                 <p><b>Additional Information: </b>${succesfulDonations[i].succesfulDonation.addInfo}</p>
                             </div>`;
-            }
+                }
 
-            const succesfulDonationsBtn = document.getElementById("succesful-donation-btn"); /* Refresh HTML Element */
-            succesfulDonationsBtn.classList.add("donation-active-btn");   /* Make button "active"*/
-            const pendingDonationsBtn = document.getElementById("pending-donation-btn");
-            pendingDonationsBtn.classList.remove("donation-active-btn");    /* "Deactivate" opposing button */
+                const succesfulDonationsBtn = document.getElementById("succesful-donation-btn"); /* Refresh HTML Element */
+                succesfulDonationsBtn.classList.add("donation-active-btn");   /* Make button "active"*/
+                const pendingDonationsBtn = document.getElementById("pending-donation-btn");
+                pendingDonationsBtn.classList.remove("donation-active-btn");    /* "Deactivate" opposing button */
+            }
         }
 
 
         window.submitPending = submitPending;
-        window.fetchDonations = fetchDonations;
         window.fetchUserDonations = fetchUserDonations;
         window.succesfulUpdate = succesfulUpdate;
     </script>
