@@ -29,6 +29,7 @@ const checkTheme = () => {  /* Enforce Theme persistence */
 }
 checkTheme();
 
+
 // Navigation via Navbar
 const donateWrapper = document.getElementById("donate-wrapper");
 const requestWrapper = document.getElementById("request-wrapper");
@@ -51,7 +52,6 @@ const toggleCollapsible = () => {
         collapsible.style.display = "flex";
     }
 }
-
 
 
 // Popup/Modal Display & Animation
@@ -134,76 +134,6 @@ const togglePassword = (passwordID) => {
     }
 }
 
-
-
-// Sign-In
-// class user {    /* Declare user object class */
-//     constructor(username, usermail, userpassword) {
-//         this.userName = username;
-//         this.userMail = usermail;
-//         this.userPassword = userpassword;
-//     }
-// }
-
-// const signUserUp = () => {
-//     const signUpUsername = document.getElementById('sign-up-username');
-//     const signUpEmail = document.getElementById('sign-up-email');
-//     const signUpPassword = document.getElementById('sign-up-password');
-//     const signUpConfirm = document.getElementById('sign-up-confirm');
-
-//     if ((signUpPassword.value == signUpConfirm.value) &&
-//         ((signUpUsername.value != "") && (signUpEmail.value != "") && (signUpPassword.value != ""))
-//     ) {
-//         const userObj = new user(signUpUsername.value, signUpEmail.value, signUpPassword.value);
-
-//         if (localStorage.users) {
-//             let users = JSON.parse(localStorage.users); /* Fetch list of Users */
-//             users.push(userObj);    /* Sign new user up */
-//             localStorage.users = JSON.stringify(users); /* Update Users DB */
-
-
-//             hideDialog("sign-up-dialog");
-//             showDialog("sign-in-dialog", "sign-up-dialog"); /* Redirect to Log-In */
-//             setTimeout(() => { document.getElementById("sign-up-success").style.display = "flex" }, 250)
-//         } else {
-//             let users = [];
-//             users.push(userObj);
-//             localStorage.users = JSON.stringify(users); /* Create Users DB */
-
-//             hideDialog("sign-up-dialog");
-//             showDialog("sign-in-dialog", "sign-up-dialog"); /* Redirect to Log-In */
-//             setTimeout(() => { document.getElementById("sign-up-success").style.display = "flex" }, 250)
-//         }
-//     } else {
-//         document.getElementById("invalid-sign-up-details").style.display = "flex";
-//     }
-// }
-
-// const LogUserIn = () => {
-//     const signInUsername = document.getElementById('sign-in-username');
-//     const signInEmail = document.getElementById('sign-in-email');
-//     const signInPassword = document.getElementById('sign-in-password');
-//     const signInConfirm = document.getElementById('sign-in-confirm');
-
-//     if ((signInPassword.value == signInConfirm.value) &&
-//         ((signInUsername.value != "") && (signInEmail.value != "") && (signInPassword.value != ""))
-//     ) {
-//         const userObj = new user(signInUsername.value, signInEmail.value, signInPassword.value);
-
-//         let users = JSON.parse(localStorage.users); /* Fetch list of Users */
-//         if (users.findIndex((value) => { return ((value.userName == userObj.userName) && (value.userPassword == userObj.userPassword) && (value.userMail == userObj.userMail)) }) > -1) {
-//             localStorage.currentUser = JSON.stringify(users.find((value) => { return ((value.userName == userObj.userName) && (value.userPassword == userObj.userPassword) && (value.userMail == userObj.userMail)) }));
-//             window.location.href = "index.html";
-//             console.log("logged in");
-
-//         } else {
-//             document.getElementById("invalid-sign-in-details").style.display = "flex";
-//         }
-
-//     } else {
-//         document.getElementById("invalid-sign-in-details").style.display = "flex";
-//     }
-// }
 
 // const signUserOut = () => {
 //     localStorage.removeItem("currentUser");
@@ -320,23 +250,6 @@ const badgeClear = (badgeID) => { /* Clear the pending donations/requests badge 
 
     triggerBadgeClear();
 }
-
-
-// Local storage Succesful donations
-// const fetchSuccesfulDonations = () => {
-//     let fecthedDonations = [];
-
-//     if (localStorage.succesfulDonations) {  /* localStorage check/refresh */
-//         fecthedDonations = JSON.parse(localStorage.succesfulDonations);
-//         console.log("fecthedDonations:", fecthedDonations);
-//     }
-//     else {
-//         localStorage.setItem("succesfulDonations", JSON.stringify([])) /* localStorage initializtion */
-//         console.log("fecthedDonations:", fecthedDonations);
-//     }
-
-//     return fecthedDonations;
-// }
 
 
 // Enter button submits form

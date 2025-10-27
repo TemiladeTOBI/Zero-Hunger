@@ -6,10 +6,3 @@ OK ; Money/Donate ; Heart ; Receive ; Checkout ; Submit; Caution - Duplicate, Li
 Socials - Facebook Instagram YouTube 9gag Twitter Google Email Sign-in Log out Sign up
 
 Bowl, Smiles
-
-<div id="placeholder-div">
-                                        <div>
-                                            <img id="placeholder-icon" src="./icon/heart.svg" alt="Loading Icon">
-                                        </div>
-                                        <p>Fetching...</p>
-                                    </div>

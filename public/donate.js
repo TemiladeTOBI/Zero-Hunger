@@ -1,7 +1,6 @@
 let pendingDonations = []   /* List of pending donations */
 
 
-
 // Navbar Donations Review visibility 
 const viewDonations = () => {
     let donationsReview = document.getElementById("donations-review");
@@ -14,7 +13,6 @@ const closeDonations = () => {
 
     setTimeout(() => { donationsReview.classList.remove("donations-review-visible"); }, 1);
 }
-
 
 
 // Pending Donation Object Creation
@@ -133,11 +131,6 @@ const formReset = () => {
 }
 formReset();
 
-
-
-// Local storage Succesful donations
-// let succesfulDonations = fetchSuccesfulDonations() /* Array intialization */
-
 // Succesful donation class declaration
 class succesfulDonation {
     constructor(type, unit, amount, location, addInfo) {
@@ -148,22 +141,3 @@ class succesfulDonation {
         this.addInfo = addInfo;
     }
 }
-
-// const submitPending = () => {   /* Submit pending donations */
-//     if (pendingDonations.length != 0) {
-//         for (let i = 0; i < pendingDonations.length; i++) {
-//             const pendingDonation = pendingDonations[i];
-
-//             const succesfulDonationObj = new succesfulDonation(pendingDonation.type, pendingDonation.unit, pendingDonation.amount, pendingDonation.location, pendingDonation.addInfo);
-//             succesfulDonations.push(succesfulDonationObj);
-//             localStorage.succesfulDonations = JSON.stringify(succesfulDonations);
-//         }
-
-//         succesfulUpdate();
-
-//         pendingDonations = [];  /* Empty pending array */
-//         badgeClear("donations-badge");
-//     } else {
-//         console.log("No pending!");
-//     }
-// }
