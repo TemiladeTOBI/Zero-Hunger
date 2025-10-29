@@ -405,6 +405,29 @@ textarea:focus {
     box-shadow: 0 0 0.5rem hsl(19, 100%, 50%);
 }
 
+#no-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    font-family: sans-serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    height: 100%;
+    width: 100%;
+    filter: opacity(0.5);
+}
+
+#no-results div {
+    width: 25%;
+}
+
+#no-results img {
+    width: 100%;
+    height: auto;
+}
+
 @media only screen and (max-width: 992px) {
     .requests-review {
         width: 60dvw;

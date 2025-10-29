@@ -129,6 +129,26 @@
     border-radius: 0.25rem;
 }
 
+.edited-card {
+    animation-name: flash-card;
+    animation-duration: 500ms;
+    animation-iteration-count: infinite;
+}
+
+@keyframes flash-card {
+    0% {
+        background-color: hsl(271, 76%, 33%);
+    }
+
+    50% {
+        background-color: hsl(271, 76%, 66%);
+    }
+
+    100% {
+        background-color: hsl(271, 76%, 33%);
+    }
+}
+
 .donation-card p {
     border: 1px hsl(19, 100%, 50%) solid;
     padding: 0.5rem;
@@ -176,6 +196,12 @@
 .donation-card button:hover {
     background-color: hsl(0, 75%, 50%);
     border-color: hsl(0, 75%, 50%);
+}
+
+.donation-card div {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 
 #donate-hero {
@@ -303,13 +329,21 @@ textarea:focus {
     outline: none;
 }
 
-#button-div {
+.button-div {
     display: flex;
+    flex-direction: row;
     justify-content: space-around;
     width: 100%;
 }
 
-#continue-btn {
+#edit-button-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.continue-btn {
     padding: 0.75rem 1.5rem;
     color: hsl(19, 100%, 50%);
     background-color: transparent;
@@ -321,15 +355,15 @@ textarea:focus {
     transition: 500ms;
 }
 
-#continue-btn:hover,
-#continue-btn:focus {
+.continue-btn:hover,
+.continue-btn:focus {
     color: hsl(225, 100%, 18%);
     background-color: hsl(19, 100%, 50%);
     transition: 55ms;
     outline: none;
 }
 
-#reset-btn {
+.reset-btn {
     padding: 0.75rem 1.5rem;
     color: #00a1ffff;
     background-color: transparent;
@@ -341,12 +375,18 @@ textarea:focus {
     transition: 500ms;
 }
 
-#reset-btn:hover,
-#reset-btn:focus {
+.reset-btn:hover,
+.reset-btn:focus {
     color: hsl(225, 100%, 18%);
     background-color: #00a1ffff;
     transition: 55ms;
     outline: none;
+}
+
+#edit-body form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 @media only screen and (max-width: 992px) {

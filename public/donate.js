@@ -72,6 +72,39 @@ const createPendingSwitch = () => { /* Form validation switch */
     }
 }
 
+let editedDonationIndex;
+
+const editPending = (i) => {   /* Edit pending donations */
+    editedDonationIndex = i;
+
+    document.getElementById("edit-type-select").value = pendingDonations[i].type;
+    document.getElementById("edit-unit-select").value = pendingDonations[i].unit;
+    document.getElementById("edit-amount-input").value = pendingDonations[i].amount;
+    document.getElementById("edit-pickup-textarea").value = pendingDonations[i].location;
+    document.getElementById("edit-additional-textarea").value = pendingDonations[i].addInfo;
+
+    showDialog("edit-dialog");
+}
+
+const savePending = () => {   /* Save edited pending donations */
+    pendingDonations[editedDonationIndex].type = document.getElementById("edit-type-select").value;
+    pendingDonations[editedDonationIndex].unit = document.getElementById("edit-unit-select").value;
+    pendingDonations[editedDonationIndex].amount = document.getElementById("edit-amount-input").value;
+    pendingDonations[editedDonationIndex].location = document.getElementById("edit-pickup-textarea").value;
+    pendingDonations[editedDonationIndex].addInfo = document.getElementById("edit-additional-textarea").value;
+
+    hideDialog('edit-dialog');
+    pendingUpdate();
+    flashCard(editedDonationIndex);
+}
+
+const flashCard = (i) => {  /* Animate donation card */
+    document.getElementById(`pending${i}`).classList.add('edited-card');
+    setTimeout(() => {
+        document.getElementById(`pending${i}`).classList.remove('edited-card');
+    }, 2000);
+}
+
 // Donations Display
 let donationsDisplay = document.getElementById("donation-display");
 let pendingDonationsBtn = document.getElementById("pending-donation-btn");
@@ -90,7 +123,10 @@ const pendingUpdate = () => {   /* Display pending donations */
                                 <p><b>Amount: </b>${pendingDonations[i].amount}</p>
                                 <p><b>Pick-up Location: </b>${pendingDonations[i].location}</p>
                                 <p><b>Additional Information: </b>${pendingDonations[i].addInfo}</p>
+                                <div>
                                 <button onclick="removePending(${i})">Delete</button>
+                                <button onclick="editPending(${i})">Edit</button>
+                                </div>
                             </div>`;
     }
 

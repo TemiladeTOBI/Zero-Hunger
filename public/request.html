@@ -145,16 +145,61 @@
     </div>
 
     <div id="modals">
+        <dialog id="logo-dialog" class="popover">
+            <div id="logo-header" class="popover-header">
+                <h2>The Zero-Hunger Logo</h2>
+                <button onmouseover="crossHover('sign-in-button-cross')" onmouseout="crossReset('sign-in-button-cross')"
+                    onclick="hideDialog('logo-dialog')">
+                    <img id="sign-in-button-cross" src="./icon/cross.svg" alt="Cross button"
+                        onmouseover="crossHover('sign-in-button-cross')"
+                        onmouseout="crossReset('sign-in-button-cross')">
+                </button>
+            </div>
+            <div id="logo-body" class="popover-body">
+                <div id="logo-body-img-wrapper">
+                    <img src="./logo/Zero-Hunger[blue].svg" alt="Zero-Hunger logo">
+                </div>
+                <div id="logo-body-txt-wrapper">
+                    <p><strong>Seedling:</strong> The seedling reminds us that every gift given and every prayer said
+                        are seeds planted into a lives. Regularly watered and tended with time, these lives will grow to
+                        yield fruit and give back into other lives.</p>
+                    <p><strong>Heart:</strong>The heart is reminiscent of breaking bread - selflessly sharing with the
+                        needy. The foundation on which Zero-Hunger was born.</p>
+                </div>
+            </div>
+        </dialog>
+        <dialog id="mission-dialog" class="popover">
+            <div id="mission-header" class="popover-header">
+                <h2>Zero-Hunger's Mission</h2>
+                <button onmouseover="crossHover('sign-in-button-cross')" onmouseout="crossReset('sign-in-button-cross')"
+                    onclick="hideDialog('mission-dialog')">
+                    <img id="sign-in-button-cross" src="./icon/cross.svg" alt="Cross button"
+                        onmouseover="crossHover('sign-in-button-cross')"
+                        onmouseout="crossReset('sign-in-button-cross')">
+                </button>
+            </div>
+            <div id="mission-body" class="popover-body"></div>
+        </dialog>
+        <dialog id="vision-dialog" class="popover">
+            <div id="vision-header" class="popover-header">
+                <h2>The Zero-Hunger Vision</h2>
+                <button onmouseover="crossHover('sign-in-button-cross')" onmouseout="crossReset('sign-in-button-cross')"
+                    onclick="hideDialog('vision-dialog')">
+                    <img id="sign-in-button-cross" src="./icon/cross.svg" alt="Cross button"
+                        onmouseover="crossHover('sign-in-button-cross')"
+                        onmouseout="crossReset('sign-in-button-cross')">
+                </button>
+            </div>
+            <div id="vision-body" class="popover-body"></div>
+        </dialog>
     </div>
 
     <div id="further">
         <ul>
             <li class="ul-header">Know more about us</li>
-            <li><a href="">Our Logo</a></li>
-            <li><a href="">Our Mission</a></li>
-            <li><a href="">Our Vision</a></li>
-            <li><a href="">Our Partners</a></li>
-            <li><a href="">Testimonies</a></li>
+            <li onclick="showDialog('logo-dialog')"><a href="#">Our Logo</a></li>
+            <li onclick="showDialog('mission-dialog')"><a href="#">Our Mission</a></li>
+            <li onclick="showDialog('vision-dialog')"><a href="#">Our Vision</a></li>
         </ul>
         <ul>
             <li class="ul-header">Take action</li>
@@ -181,7 +226,7 @@
         // https://firebase.google.com/docs/web/setup#available-libraries
 
         // Authentication
-        import { getAuth, onAuthStateChanged, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+        import { getAuth, onAuthStateChanged, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
 
 
         // Your web app's Firebase configuration
@@ -204,6 +249,16 @@
         const auth = getAuth();
         let currentUser, currentUserUID;
         let succesfulRequests;
+
+        const signUserOut = () => {
+            signOut(auth).then(() => {
+                // Sign-out successful.
+                window.location.href = "index.html";
+            }).catch((error) => {
+                // An error happened.
+                console.log(error);
+            });
+        };
 
         const checkCurrentUser = (() => {   /* Fetch Current User */
             onAuthStateChanged(auth, (user) => {
@@ -248,10 +303,22 @@
 
             if (currentUser != undefined) {
                 let avatarSrc;  /* User Avatar Image Source */
-                if ((currentUser.photoURL == "") || (currentUser.photoURL == undefined)) {
+                let displayName;    /* User Name String */
+
+                if ((typeof (currentUser.photoURL)) != "string") {
                     avatarSrc = "./icon/heart.svg";
                 } else {
                     avatarSrc = currentUser.photoURL;
+                }
+                
+
+                if ((typeof (currentUser.displayName)) != "string") {
+                    displayName = currentUser.email;
+                    const atIndex = displayName.indexOf('@');
+
+                    displayName = displayName.slice(0, atIndex);    /* Clean up Username */
+                } else {
+                    displayName = currentUser.displayName;
                 }
 
                 // Load User Details
@@ -262,11 +329,11 @@
                     <a href="#" onclick="signUserOut()">Sign Out</a></p>
                 </div>
                 <div id="user-avatar-wrapper">
-                    <img src="${currentUser.photoURL}" alt="User Avatar">
+                    <img src="${avatarSrc}" alt="User Avatar">
                 </div>
                 <div id="user-details">
-                    <p id="user-name">${currentUser.displayName}</p>
-                    <p id="user-status"><span id="user-staus-icon"></span> Status</p>
+                    <p id="user-name">${displayName}</p>
+                    <p id="user-status"><span id="user-staus-icon"></span> Signed-In</p>
                 </div>
             </div>`
             }
@@ -279,7 +346,7 @@
             </div>`
             }
         };
-
+        
 
         window.checkCurrentUser = checkCurrentUser;
         window.forceCurrentUser = forceCurrentUser;
@@ -386,10 +453,19 @@
                     queryResultsUpdate();
                 }, 1000);
             } else {
-                document.getElementById("request-results-wrapper").innerHTML = "";  /* Clear display */
+                if (queryArray.length == 0) {
+                    // Query filter returns null
+                    document.getElementById("request-results-wrapper").innerHTML = `<div id="no-results">
+                <p>No available donations match criteria!</p>
+                <div>
+                    <img src="./icon/heartbroken.svg" alt="Heartbroken">
+                </div>
+            </div>`;
+                } else {
+                    document.getElementById("request-results-wrapper").innerHTML = "";  /* Clear display */
 
-                for (let i = 0; i < queryArray.length; i++) {
-                    document.getElementById("request-results-wrapper").innerHTML += `<div id="result${i}" class="request-card">
+                    for (let i = 0; i < queryArray.length; i++) {
+                        document.getElementById("request-results-wrapper").innerHTML += `<div id="result${i}" class="request-card">
                     <p><b>Food Type: </b>${queryArray[i].succesfulDonation.type}</p>
                     <p><b>Unit Type: </b>${queryArray[i].succesfulDonation.unit}</p>
                     <p><b>Amount: </b>${queryArray[i].succesfulDonation.amount}</p>
@@ -397,9 +473,10 @@
                     <p><b>Additional Information: </b>${queryArray[i].succesfulDonation.addInfo}</p>
                     <button onclick="addPendingRequest(${i})">Request</button>
                 </div>`;
-                }
+                    }
 
-                window.location.href = "#request-results"   /* Navigate to results */
+                    window.location.href = "#request-results"   /* Navigate to results */
+                }
             }
         }
 
@@ -509,6 +586,7 @@
         formReset();
 
 
+        window.signUserOut = signUserOut;
         window.fetchDonations = fetchDonations;
         window.writeRequest = writeRequest;
         window.donationSearch = donationSearch;

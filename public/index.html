@@ -92,11 +92,6 @@
             </div>
             <div id="sign-up-body" class="popover-body">
                 <div>
-                    <!-- <div class="label-input-subdiv">
-                        <label for="sign-up-username">Username</label>
-                        <input id="sign-up-username" type="text" placeholder="Username"
-                            onkeyup="enterTrigger(event, signUserUp)">
-                    </div> -->
                     <div class="label-input-subdiv">
                         <label for="sign-up-email">Email</label>
                         <input id="sign-up-email" type="text" placeholder="Email"
@@ -177,16 +172,61 @@
                 <button id="sign-in-google-btn" onclick="signInGoogle()">Log In With Google</button>
             </div>
         </dialog>
+        <dialog id="logo-dialog" class="popover">
+            <div id="logo-header" class="popover-header">
+                <h2>The Zero-Hunger Logo</h2>
+                <button onmouseover="crossHover('sign-in-button-cross')" onmouseout="crossReset('sign-in-button-cross')"
+                    onclick="hideDialog('logo-dialog')">
+                    <img id="sign-in-button-cross" src="./icon/cross.svg" alt="Cross button"
+                        onmouseover="crossHover('sign-in-button-cross')"
+                        onmouseout="crossReset('sign-in-button-cross')">
+                </button>
+            </div>
+            <div id="logo-body" class="popover-body">
+                <div id="logo-body-img-wrapper">
+                    <img src="./logo/Zero-Hunger[blue].svg" alt="Zero-Hunger logo">
+                </div>
+                <div id="logo-body-txt-wrapper">
+                    <p><strong>Seedling:</strong> The seedling reminds us that every gift given and every prayer said
+                        are seeds planted into a lives. Regularly watered and tended with time, these lives will grow to
+                        yield fruit and give back into other lives.</p>
+                    <p><strong>Heart:</strong>The heart is reminiscent of breaking bread - selflessly sharing with the
+                        needy. The foundation on which Zero-Hunger was born.</p>
+                </div>
+            </div>
+        </dialog>
+        <dialog id="mission-dialog" class="popover">
+            <div id="mission-header" class="popover-header">
+                <h2>Zero-Hunger's Mission</h2>
+                <button onmouseover="crossHover('sign-in-button-cross')" onmouseout="crossReset('sign-in-button-cross')"
+                    onclick="hideDialog('mission-dialog')">
+                    <img id="sign-in-button-cross" src="./icon/cross.svg" alt="Cross button"
+                        onmouseover="crossHover('sign-in-button-cross')"
+                        onmouseout="crossReset('sign-in-button-cross')">
+                </button>
+            </div>
+            <div id="mission-body" class="popover-body"></div>
+        </dialog>
+        <dialog id="vision-dialog" class="popover">
+            <div id="vision-header" class="popover-header">
+                <h2>The Zero-Hunger Vision</h2>
+                <button onmouseover="crossHover('sign-in-button-cross')" onmouseout="crossReset('sign-in-button-cross')"
+                    onclick="hideDialog('vision-dialog')">
+                    <img id="sign-in-button-cross" src="./icon/cross.svg" alt="Cross button"
+                        onmouseover="crossHover('sign-in-button-cross')"
+                        onmouseout="crossReset('sign-in-button-cross')">
+                </button>
+            </div>
+            <div id="vision-body" class="popover-body"></div>
+        </dialog>
     </div>
 
     <div id="further">
         <ul>
             <li class="ul-header">Know more about us</li>
-            <li><a href="">Our Logo</a></li>
-            <li><a href="">Our Mission</a></li>
-            <li><a href="">Our Vision</a></li>
-            <li><a href="">Our Partners</a></li>
-            <li><a href="">Testimonies</a></li>
+            <li onclick="showDialog('logo-dialog')"><a href="#">Our Logo</a></li>
+            <li onclick="showDialog('mission-dialog')"><a href="#">Our Mission</a></li>
+            <li onclick="showDialog('vision-dialog')"><a href="#">Our Vision</a></li>
         </ul>
         <ul>
             <li class="ul-header">Take action</li>
@@ -258,6 +298,7 @@
                         const errorCode = error.code;
                         const errorMessage = error.message;
                         console.log(errorCode, errorMessage);
+                        alert(errorCode, errorMessage);
                         // ..
                     });
             } else {
@@ -340,6 +381,8 @@
 
                     // const uid = user.uid;
                     currentUser = user;
+                    console.log(currentUser);
+
                     loadUserNav();
                     // ...
                 } else {
@@ -370,10 +413,22 @@
 
             if (currentUser != undefined) {
                 let avatarSrc;  /* User Avatar Image Source */
-                if ((currentUser.photoURL == "") || (currentUser.photoURL == undefined)) {
+                let displayName;    /* User Name String */
+
+                if ((typeof (currentUser.photoURL)) != "string") {
                     avatarSrc = "./icon/heart.svg";
                 } else {
                     avatarSrc = currentUser.photoURL;
+                }
+                
+
+                if ((typeof (currentUser.displayName)) != "string") {
+                    displayName = currentUser.email;
+                    const atIndex = displayName.indexOf('@');
+
+                    displayName = displayName.slice(0, atIndex);    /* Clean up Username */
+                } else {
+                    displayName = currentUser.displayName;
                 }
 
                 // Load User Details
@@ -384,11 +439,11 @@
                     <a href="#" onclick="signUserOut()">Sign Out</a></p>
                 </div>
                 <div id="user-avatar-wrapper">
-                    <img src="${currentUser.photoURL}" alt="User Avatar">
+                    <img src="${avatarSrc}" alt="User Avatar">
                 </div>
                 <div id="user-details">
-                    <p id="user-name">${currentUser.displayName}</p>
-                    <p id="user-status"><span id="user-staus-icon"></span> Status</p>
+                    <p id="user-name">${displayName}</p>
+                    <p id="user-status"><span id="user-staus-icon"></span> Signed-In</p>
                 </div>
             </div>`
             }

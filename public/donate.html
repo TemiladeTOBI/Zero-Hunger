@@ -128,21 +128,142 @@
                     <textarea name="additional-info" id="additional-textarea">value="5"</textarea>
                 </div>
             </form>
-            <div id="button-div">
-                <button id="continue-btn" onclick="createPendingSwitch()">Continue</button>
-                <button id="reset-btn" onclick="formReset()">Reset</button>
+            <div class="button-div">
+                <button class="continue-btn" onclick="createPendingSwitch()">Continue</button>
+                <button class="reset-btn" onclick="formReset()">Reset</button>
             </div>
         </div>
+    </div>
+
+    <div id="modals">
+        <dialog id="logo-dialog" class="popover">
+            <div id="logo-header" class="popover-header">
+                <h2>The Zero-Hunger Logo</h2>
+                <button onmouseover="crossHover('sign-in-button-cross')" onmouseout="crossReset('sign-in-button-cross')"
+                    onclick="hideDialog('logo-dialog')">
+                    <img id="sign-in-button-cross" src="./icon/cross.svg" alt="Cross button"
+                        onmouseover="crossHover('sign-in-button-cross')"
+                        onmouseout="crossReset('sign-in-button-cross')">
+                </button>
+            </div>
+            <div id="logo-body" class="popover-body">
+                <div id="logo-body-img-wrapper">
+                    <img src="./logo/Zero-Hunger[blue].svg" alt="Zero-Hunger logo">
+                </div>
+                <div id="logo-body-txt-wrapper">
+                    <p><strong>Seedling:</strong> The seedling reminds us that every gift given and every prayer said
+                        are seeds planted into a lives. Regularly watered and tended with time, these lives will grow to
+                        yield fruit and give back into other lives.</p>
+                    <p><strong>Heart:</strong>The heart is reminiscent of breaking bread - selflessly sharing with the
+                        needy. The foundation on which Zero-Hunger was born.</p>
+                </div>
+            </div>
+        </dialog>
+        <dialog id="mission-dialog" class="popover">
+            <div id="mission-header" class="popover-header">
+                <h2>Zero-Hunger's Mission</h2>
+                <button onmouseover="crossHover('sign-in-button-cross')" onmouseout="crossReset('sign-in-button-cross')"
+                    onclick="hideDialog('mission-dialog')">
+                    <img id="sign-in-button-cross" src="./icon/cross.svg" alt="Cross button"
+                        onmouseover="crossHover('sign-in-button-cross')"
+                        onmouseout="crossReset('sign-in-button-cross')">
+                </button>
+            </div>
+            <div id="mission-body" class="popover-body"></div>
+        </dialog>
+        <dialog id="vision-dialog" class="popover">
+            <div id="vision-header" class="popover-header">
+                <h2>The Zero-Hunger Vision</h2>
+                <button onmouseover="crossHover('sign-in-button-cross')" onmouseout="crossReset('sign-in-button-cross')"
+                    onclick="hideDialog('vision-dialog')">
+                    <img id="sign-in-button-cross" src="./icon/cross.svg" alt="Cross button"
+                        onmouseover="crossHover('sign-in-button-cross')"
+                        onmouseout="crossReset('sign-in-button-cross')">
+                </button>
+            </div>
+            <div id="vision-body" class="popover-body"></div>
+        </dialog>
+        <dialog id="edit-dialog" class="popover">
+            <div id="edit-header" class="popover-header">
+                <h2>Edit Donation</h2>
+                <button onmouseover="crossHover('sign-in-button-cross')" onmouseout="crossReset('sign-in-button-cross')"
+                    onclick="hideDialog('edit-dialog')">
+                    <img id="sign-in-button-cross" src="./icon/cross.svg" alt="Cross button"
+                        onmouseover="crossHover('sign-in-button-cross')"
+                        onmouseout="crossReset('sign-in-button-cross')">
+                </button>
+            </div>
+            <div id="edit-body" class="popover-body">
+                <form>
+                    <div id="edit-type-subdiv">
+                        <label for="type-select">Type:</label>
+                        <select name="food-type" id="edit-type-select" required>
+                            <option value="Rice">Rice</option>
+                            <option value="Spaghetti">Spaghetti</option>
+                            <option value="Noodles">Noodles</option>
+                            <option value="Beans">Beans</option>
+                            <option value="Flour">Flour</option>
+                            <option value="Semo">Semo</option>
+                            <option value="Gaari">Gaari</option>
+                            <option value="Yam">Yam</option>
+                            <option value="Potatoes">Potatoes</option>
+                            <option value="Vegetables">Vegetables</option>
+                            <option value="Fruits">Fruits</option>
+                            <option value="Dairy">Dairy</option>
+                            <option value="Salt">Salt</option>
+                            <option value="Sugar">Sugar</option>
+                            <option value="Seasoning or Spices">Seasoning or Spices</option>
+                            <option value="Beverages">Beverages</option>
+                            <option value="Palm Oil">Palm Oil</option>
+                            <option value="Vegetable Oil">Vegetable Oil</option>
+                            <option value="Groundnut Oil">Groundnut Oil</option>
+                            <option value="Other">Other(specify in Additional Info)</option>
+                        </select>
+                    </div>
+                    <div id="edit-unit-subdiv">
+                        <label for="unit-select">Unit:</label>
+                        <select name="food-unit" id="edit-unit-select" required>
+                            <option value="Pieces">Pieces</option>
+                            <option value="Kilograms">Kilograms</option>
+                            <option value="Cups">Cups</option>
+                            <option value="Bowls">Bowls</option>
+                            <option value="Bags">Bags</option>
+                            <option value="Sacks">Sacks</option>
+                            <option value="Packs">Packs</option>
+                            <option value="Sachets">Sachets</option>
+                            <option value="Bottles">Bottles</option>
+                            <option value="Tubers">Tubers</option>
+                            <option value="Other">Other(specify in Additional Info)</option>
+                        </select>
+                    </div>
+                    <div id="edit-amount-subdiv">
+                        <label for="amount-input">Amount:</label>
+                        <input type="number" name="food-amount" id="edit-amount-input" step="1" min="1" required>
+                    </div>
+                    <div id="edit-pickup-subdiv" class="textarea-subdiv">
+                        <label for="pickup-textarea">Pick-up Location:</label>
+                        <textarea name="pickup-location" id="edit-pickup-textarea"
+                            placeholder="Make use of landmark keywords!" required></textarea>
+                    </div>
+                    <div id="edit-additional-subdiv" class="textarea-subdiv">
+                        <label for="additional-textarea">Additional Information:</label>
+                        <textarea name="additional-info" id="edit-additional-textarea"></textarea>
+                    </div>
+                </form>
+                <div id="edit-button-div" class="button-div">
+                    <button class="continue-btn" onclick="savePending()">Save</button>
+                    <button class="reset-btn" onclick="hideDialog('edit-dialog')">Close</button>
+                </div>
+            </div>
+        </dialog>
     </div>
 
     <div id="further">
         <ul>
             <li class="ul-header">Know more about us</li>
-            <li><a href="">Our Logo</a></li>
-            <li><a href="">Our Mission</a></li>
-            <li><a href="">Our Vision</a></li>
-            <li><a href="">Our Partners</a></li>
-            <li><a href="">Testimonies</a></li>
+            <li onclick="showDialog('logo-dialog')"><a href="#">Our Logo</a></li>
+            <li onclick="showDialog('mission-dialog')"><a href="#">Our Mission</a></li>
+            <li onclick="showDialog('vision-dialog')"><a href="#">Our Vision</a></li>
         </ul>
         <ul>
             <li class="ul-header">Take action</li>
@@ -169,7 +290,7 @@
         // https://firebase.google.com/docs/web/setup#available-libraries
 
         // Authentication
-        import { getAuth, onAuthStateChanged, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+        import { getAuth, onAuthStateChanged, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
 
 
         // Your web app's Firebase configuration
@@ -192,6 +313,16 @@
         const provider = new GoogleAuthProvider();
         const auth = getAuth();
         let currentUser, currentUserUID;
+
+        const signUserOut = () => {
+            signOut(auth).then(() => {
+                // Sign-out successful.
+                window.location.href = "index.html";
+            }).catch((error) => {
+                // An error happened.
+                console.log(error);
+            });
+        };
 
         const checkCurrentUser = (() => {   /* Fetch Current User */
             onAuthStateChanged(auth, (user) => {
@@ -225,10 +356,22 @@
 
             if (currentUser != undefined) {
                 let avatarSrc;  /* User Avatar Image Source */
-                if ((currentUser.photoURL == "") || (currentUser.photoURL == undefined)) {
+                let displayName;    /* User Name String */
+
+                if ((typeof (currentUser.photoURL)) != "string") {
                     avatarSrc = "./icon/heart.svg";
                 } else {
                     avatarSrc = currentUser.photoURL;
+                }
+                
+
+                if ((typeof (currentUser.displayName)) != "string") {
+                    displayName = currentUser.email;
+                    const atIndex = displayName.indexOf('@');
+
+                    displayName = displayName.slice(0, atIndex);    /* Clean up Username */
+                } else {
+                    displayName = currentUser.displayName;
                 }
 
                 // Load User Details
@@ -239,11 +382,11 @@
                     <a href="#" onclick="signUserOut()">Sign Out</a></p>
                 </div>
                 <div id="user-avatar-wrapper">
-                    <img src="${currentUser.photoURL}" alt="User Avatar">
+                    <img src="${avatarSrc}" alt="User Avatar">
                 </div>
                 <div id="user-details">
-                    <p id="user-name">${currentUser.displayName}</p>
-                    <p id="user-status"><span id="user-staus-icon"></span> Status</p>
+                    <p id="user-name">${displayName}</p>
+                    <p id="user-status"><span id="user-staus-icon"></span> Signed-In</p>
                 </div>
             </div>`
             }
@@ -257,7 +400,7 @@
             }
         };
 
-
+        
         window.checkCurrentUser = checkCurrentUser;
         window.forceCurrentUser = forceCurrentUser;
         window.loadUserNav = loadUserNav;
@@ -327,7 +470,7 @@
                 setTimeout(() => {
                     succesfulUpdate();
                     console.log("Fetching...");
-                    
+
                 }, 1000);
             } else {
                 donationsDisplay.innerHTML = "";    /* Clear Display */
@@ -351,6 +494,7 @@
         }
 
 
+        window.signUserOut = signUserOut;
         window.submitPending = submitPending;
         window.fetchUserDonations = fetchUserDonations;
         window.succesfulUpdate = succesfulUpdate;
