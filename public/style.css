@@ -602,6 +602,9 @@ p {
     outline: none;
 }
 
+#mission-body, #vision-body {
+    padding: 1rem;
+}
 
 /* Loading Placeholder */
 #placeholder-div {
