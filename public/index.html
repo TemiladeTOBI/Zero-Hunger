@@ -258,7 +258,7 @@
         // https://firebase.google.com/docs/web/setup#available-libraries
 
         // Authentication
-        import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+        import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
 
 
         // Your web app's Firebase configuration
@@ -336,7 +336,7 @@
             }
         }
 
-        const signUpGoogle = () => {
+        const popupGoogle = () => {
             signInWithPopup(auth, provider)
                 .then((result) => {
                     // This gives you a Google Access Token. You can use it to access the Google API.
@@ -366,6 +366,18 @@
                     // ...
                 });
         };
+
+        const redirectGoogle = () => {
+            signInWithRedirect(auth, provider);
+        }
+
+        const signInGoogle = () => {
+            if ((window.screen.orientation.type == "landscape-primary") || (window.screen.orientation.type == "landscape-secondary")) {
+                popupGoogle();
+            } else {
+                redirectGoogle();
+            }
+        }
 
         const signUserOut = () => {
             signOut(auth).then(() => {
@@ -439,8 +451,11 @@
                 navLinkWrapper.innerHTML += `<div id="user-div" onmouseover="showPopunder('user-details-popunder')" onclick="showPopunder('user-details-popunder')">
                 <div id="user-details-popunder" class="popunder" onfocus="showPopunder('user-details-popunder')">
                     <p class="popunder-mail"><b>Email: </b>${currentUser.email}</p>
-                    <p class="popunder-out"><a href="#" onclick="hidePopunder('user-details-popunder')"">Close</a>
-                    <a href="#" onclick="signUserOut()">Sign Out</a></p>
+                    <p class="popunder-out"><span id="close-popunder-span"
+                                        onclick="hidePopunder('user-details-popunder')"><a href="#">Close</a><img src="./icon/cross[shrunk].svg" alt="Close Icon"></span>
+                                    <span id="sign-out-span" onclick="signUserOut()"><a href=" #">Sign Out</a><img
+                                            src="./icon/sign-out.svg" alt="Sign-Out Icon"></span>
+                                </p>
                 </div>
                 <div id="user-avatar-wrapper">
                     <img src="${avatarSrc}" alt="User Avatar">
@@ -456,14 +471,15 @@
 
                 // Load Sign-In/Log-In instead
                 navLinkWrapper.innerHTML += `<div id="sign-in-wrapper">
-                <button id="sign-in-button" onclick="showDialog('sign-up-dialog')">Sign In</button>
+                <button id="sign-in-button" onclick="showDialog('sign-up-dialog')">Sign In<span><img
+                                        src="./icon/sign-in.svg" alt=""></span></button>
             </div>`
             }
         };
 
 
         window.signUserUp = signUserUp;
-        window.signUpGoogle = signUpGoogle;
+        window.signInGoogle = signInGoogle;
         window.signUserOut = signUserOut;
         window.checkCurrentUser = checkCurrentUser;
         window.forceCurrentUser = forceCurrentUser;

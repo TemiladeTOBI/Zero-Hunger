@@ -171,7 +171,7 @@ body[class*="light"] {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.75rem 1.5rem;
+    padding: 0.5rem 1rem;
     color: #00a1ffff;
     background-color: transparent;
     border: 2px #00a1ffff solid;
