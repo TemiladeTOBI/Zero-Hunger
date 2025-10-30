@@ -99,15 +99,18 @@ const showDialog = (dialogID, close) => {  /* Display Modals */
 
 const hideDialog = (dialogID) => {  /* Close Modals */
     const dialog = document.getElementById(`${dialogID}`);
-
+    
     dialog.classList.toggle("popover-full");
+    
     setTimeout(() => { dialog.close(); }, 125);
 }
 
 const escClose = (event, closeFunc, modalID) => { /* Close Modals with Esc key */
     if (event.key == "Escape") {
-        closeFunc(`modalID`);    /* Execute corresponding closing function */
+        closeFunc(`${modalID}`);    /* Execute corresponding closing function */
     }
+
+    console.log(event.key, closeFunc, modalID);
 }
 
 const crossHover = (crossID) => {   /* Change Cross img src */
@@ -126,11 +129,11 @@ const togglePassword = (passwordID) => {
 
     if (password.type == "password") {
         password.type = "text";
-        passwordIcon.src = "./icon/eye_open.svg";
+        passwordIcon.src = "./icon/mdi--eye.svg";
 
     } else {
         password.type = "password";
-        passwordIcon.src = "./icon/eye_closed.svg";
+        passwordIcon.src = "./icon/mdi--eye-closed.svg";
     }
 }
 

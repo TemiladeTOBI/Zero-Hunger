@@ -25,6 +25,9 @@
             </div>
             <div id="collapsible-wrapper">
                 <div id="theme-div">
+                    <span id="theme-icon-wrapper">
+                        <img src="./icon/proicons--dark-theme.svg" alt="Theme Switcher">
+                    </span>
                     <div class="element" onclick="switchTheme()">
                         <button id="theme-btn" class="element"></button>
                         <button class="underlay"></button>
@@ -80,7 +83,7 @@
     </div>
 
     <div id="modals">
-        <dialog id="sign-up-dialog" class="popover" onkeyup="escClose(event, hideDialog, 'sign-up-dialog')">
+        <dialog id="sign-up-dialog" class="popover" onkeypress="escClose(event, hideDialog, 'sign-up-dialog')">
             <div id="sign-up-header" class="popover-header">
                 <h2>Sign Up</h2>
                 <button onmouseover="crossHover('sign-in-button-cross')" onmouseout="crossReset('sign-in-button-cross')"
@@ -101,7 +104,7 @@
                         <label for="sign-up-password">Password</label>
                         <div class="password-wrapper">
                             <button id="sign-in-password-btn" onclick="togglePassword('sign-up-password')">
-                                <img id="sign-up-password-icon" class="password-view" src="./icon/eye_closed.svg"
+                                <img id="sign-up-password-icon" class="password-view" src="./icon/mdi--eye-closed.svg"
                                     alt="Closed Eye">
                             </button>
                             <input id="sign-up-password" type="password" placeholder="Password"
@@ -124,7 +127,7 @@
                 <button id="sign-up-google-btn" onclick="signInGoogle()">Sign Up With Google</button>
             </div>
         </dialog>
-        <dialog id="sign-in-dialog" class="popover" onkeyup="escClose(event, hideDialog, 'sign-in-dialog')">
+        <dialog id="sign-in-dialog" class="popover" onkeypress="escClose(event, hideDialog, 'sign-in-dialog')">
             <div id="sign-in-header" class="popover-header">
                 <h2>Log In</h2>
                 <button onclick="hideDialog('sign-in-dialog')" onfocus="crossHover('sign-in-button-cross')"
@@ -135,31 +138,26 @@
             <div id="sign-in-body" class="popover-body">
                 <p id="sign-up-success">Account created! Please log in</p>
                 <div>
-                    <!-- <div class="label-input-subdiv">
-                        <label for="sign-in-username">Username</label>
-                        <input id="sign-in-username" type="text" placeholder="Username"
-                            onkeyup="enterTrigger(event, LogUserIn)">
-                    </div> -->
                     <div class="label-input-subdiv">
                         <label for="sign-in-email">Email</label>
                         <input id="sign-in-email" type="text" placeholder="Email"
-                            onkeyup="enterTrigger(event, LogUserIn)">
+                            onkeyup="enterTrigger(event, logUserIn)">
                     </div>
                     <div class="label-input-subdiv">
                         <label for="sign-in-password">Password</label>
                         <div class="password-wrapper">
                             <button id="sign-in-password-btn" onclick="togglePassword('sign-in-password')">
-                                <img id="sign-in-password-icon" class="password-view" src="./icon/eye_closed.svg"
+                                <img id="sign-in-password-icon" class="password-view" src="./icon/mdi--eye-closed.svg"
                                     alt="Closed Eye">
                             </button>
                             <input id="sign-in-password" type="password" placeholder="Password"
-                                onkeyup="enterTrigger(event, LogUserIn)">
+                                onkeyup="enterTrigger(event, logUserIn)">
                         </div>
                     </div>
                     <div class="label-input-subdiv">
                         <label for="sign-in-confirm">Confirm Password</label>
                         <input id="sign-in-confirm" type="password" placeholder="Confirm Password"
-                            onkeyup="enterTrigger(event, LogUserIn)">
+                            onkeyup="enterTrigger(event, logUserIn)">
                     </div>
                 </div>
                 <p id="invalid-sign-in-details" class="invalid-details">Please ensure valid details!</p>
@@ -168,11 +166,11 @@
                         Up!</a></p>
             </div>
             <div id="sign-in-btn-wrapper" class="popover-body-btn-wrapper">
-                <button id="sign-in-btn" onclick="LogUserIn()">Log In</button>
+                <button id="sign-in-btn" onclick="logUserIn()">Log In</button>
                 <button id="sign-in-google-btn" onclick="signInGoogle()">Log In With Google</button>
             </div>
         </dialog>
-        <dialog id="logo-dialog" class="popover">
+        <dialog id="logo-dialog" class="popover" onkeypress="escClose(event, hideDialog, 'logo-dialog')">
             <div id="logo-header" class="popover-header">
                 <h2>The Zero-Hunger Logo</h2>
                 <button onmouseover="crossHover('sign-in-button-cross')" onmouseout="crossReset('sign-in-button-cross')"
@@ -195,32 +193,23 @@
                 </div>
             </div>
         </dialog>
-        <dialog id="mission-dialog" class="popover">
-            <div id="mission-header" class="popover-header">
-                <h2>Zero-Hunger's Mission</h2>
+        <dialog id="mission-vision-dialog" class="popover" onkeypress="escClose(event, hideDialog, 'mission-vision-dialog')">
+            <div id="mission-vision-header" class="popover-header">
+                <h2>Our Mission & Vision</h2>
                 <button onmouseover="crossHover('sign-in-button-cross')" onmouseout="crossReset('sign-in-button-cross')"
-                    onclick="hideDialog('mission-dialog')">
+                    onclick="hideDialog('mission-vision-dialog')">
                     <img id="sign-in-button-cross" src="./icon/cross.svg" alt="Cross button"
                         onmouseover="crossHover('sign-in-button-cross')"
                         onmouseout="crossReset('sign-in-button-cross')">
                 </button>
             </div>
-            <div id="mission-body" class="popover-body">
-                <p>Our mission is to provide a platform through which as many kind-hearted souls are willing can give to those in need of sustenance.</p>
-            </div>
-        </dialog>
-        <dialog id="vision-dialog" class="popover">
-            <div id="vision-header" class="popover-header">
-                <h2>The Zero-Hunger Vision</h2>
-                <button onmouseover="crossHover('sign-in-button-cross')" onmouseout="crossReset('sign-in-button-cross')"
-                    onclick="hideDialog('vision-dialog')">
-                    <img id="sign-in-button-cross" src="./icon/cross.svg" alt="Cross button"
-                        onmouseover="crossHover('sign-in-button-cross')"
-                        onmouseout="crossReset('sign-in-button-cross')">
-                </button>
-            </div>
-            <div id="vision-body" class="popover-body">
-                <p>A brotherly caring and sharing society in which no one has to go to bed hungry.</p>
+            <div id="mission-vision-body" class="popover-body">
+                <p><strong>Mission: </strong>To provide a platform through which as many kind-hearted souls are
+                    willing
+                    can give to
+                    those in need of sustenance.</p>
+                <p><strong>Vision: </strong>A brotherly caring and sharing society in which no one has to go to bed
+                    hungry.</p>
             </div>
         </dialog>
     </div>
@@ -229,8 +218,7 @@
         <ul>
             <li class="ul-header">Know more about us</li>
             <li onclick="showDialog('logo-dialog')"><a href="#">Our Logo</a></li>
-            <li onclick="showDialog('mission-dialog')"><a href="#">Our Mission</a></li>
-            <li onclick="showDialog('vision-dialog')"><a href="#">Our Vision</a></li>
+            <li onclick="showDialog('mission-vision-dialog')"><a href="#">Our Mission & Vision</a></li>
         </ul>
         <ul>
             <li class="ul-header">Take action</li>
@@ -241,9 +229,6 @@
             <li class="ul-header">Reach out to us</li>
             <li><a href=""><span class="icon-span"></span>Twitter</a></li>
             <li><a href=""><span class="icon-span"></span>Facebook</a></li>
-            <li><a href=""><span class="icon-span"></span>Instagram</a></li>
-            <li><a href=""><span class="icon-span"></span>YouTube</a></li>
-            <li><a href=""><span class="icon-span"></span>9gag</a></li>
         </ul>
     </div>
 
@@ -258,14 +243,15 @@
         // https://firebase.google.com/docs/web/setup#available-libraries
 
         // Authentication
-        import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+        import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect, getRedirectResult, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
 
 
         // Your web app's Firebase configuration
         // For Firebase JS SDK v7.20.0 and later, measurementId is optional
         const firebaseConfig = {
             apiKey: "AIzaSyAd4UJcWg4hMkvWCFS2LB_f5J0X_eKuAX4",
-            authDomain: "zero-hunger-b8414.firebaseapp.com",
+            authDomain: "zero-hunger-b8414.web.app",
+            // authDomain: "zero-hunger-b8414.firebaseapp.com",
             projectId: "zero-hunger-b8414",
             storageBucket: "zero-hunger-b8414.firebasestorage.app",
             messagingSenderId: "361960148895",
@@ -371,6 +357,34 @@
             signInWithRedirect(auth, provider);
         }
 
+        const redirectGoogleResult = () => {
+            const auth = getAuth();
+            getRedirectResult(auth)
+                .then((result) => {
+                    // This gives you a Google Access Token. You can use it to access Google APIs.
+                    const credential = GoogleAuthProvider.credentialFromResult(result);
+                    const token = credential.accessToken;
+
+                    // The signed-in user info.
+                    const user = result.user;
+                    currentUser = user;
+                    console.log(currentUser);
+                    
+                    // IdP data available using getAdditionalUserInfo(result)
+                    // ...
+                }).catch((error) => {
+                    // Handle Errors here.
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.log(errorCode, errorMessage);
+                    // The email of the user's account used.
+                    // const email = error.customData.email;
+                    // The AuthCredential type that was used.
+                    const credential = GoogleAuthProvider.credentialFromError(error);
+                    // ...
+                });
+        };
+
         const signInGoogle = () => {
             if ((window.screen.orientation.type == "landscape-primary") || (window.screen.orientation.type == "landscape-secondary")) {
                 popupGoogle();
@@ -397,8 +411,6 @@
 
                     // const uid = user.uid;
                     currentUser = user;
-                    console.log(currentUser);
-
                     loadUserNav();
                     // ...
                 } else {
@@ -421,7 +433,8 @@
             if (sessionStorage.redirectStatus) {
                 showDialog("sign-in-dialog");
                 sessionStorage.removeItem("redirectStatus");
-            }
+            };
+            redirectGoogleResult();
         })();
 
         const loadUserNav = () => { /* Check current user, to load navbar details */
@@ -436,7 +449,7 @@
                 } else {
                     avatarSrc = currentUser.photoURL;
                 }
-                
+
 
                 if ((typeof (currentUser.displayName)) != "string") {
                     displayName = currentUser.email;

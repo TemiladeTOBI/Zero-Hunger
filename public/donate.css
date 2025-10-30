@@ -470,6 +470,7 @@ textarea:focus {
 
     #hero-form-wrapper {
         padding: 0.5rem;
+        gap: 1rem;
         width: 100%;
         border-left: 4px solid hsl(19, 100%, 50%);
         border-top-right-radius: 0;
@@ -482,5 +483,14 @@ textarea:focus {
 
     input {
         font-size: 1rem;
+    }
+
+    textarea {
+        background-color: transparent;
+    }
+
+    .button-div {
+        flex-direction: column;
+        gap: 0.5rem;
     }
 }

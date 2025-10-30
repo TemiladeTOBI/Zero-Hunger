@@ -27,6 +27,9 @@
             </div>
             <div id="collapsible-wrapper">
                 <div id="theme-div">
+                    <span id="theme-icon-wrapper">
+                        <img src="./icon/proicons--dark-theme.svg" alt="Theme Switcher">
+                    </span>
                     <div class="element" onclick="switchTheme()">
                         <button id="theme-btn" class="element"></button>
                         <button class="underlay"></button>
@@ -159,29 +162,23 @@
                 </div>
             </div>
         </dialog>
-        <dialog id="mission-dialog" class="popover">
-            <div id="mission-header" class="popover-header">
-                <h2>Zero-Hunger's Mission</h2>
+        <dialog id="mission-vision-dialog" class="popover">
+            <div id="mission-vision-header" class="popover-header">
+                <h2>Our Mission & Vision</h2>
                 <button onmouseover="crossHover('sign-in-button-cross')" onmouseout="crossReset('sign-in-button-cross')"
-                    onclick="hideDialog('mission-dialog')">
+                    onclick="hideDialog('mission-vision-dialog')">
                     <img id="sign-in-button-cross" src="./icon/cross.svg" alt="Cross button"
                         onmouseover="crossHover('sign-in-button-cross')"
                         onmouseout="crossReset('sign-in-button-cross')">
                 </button>
             </div>
-            <div id="mission-body" class="popover-body"></div>
-        </dialog>
-        <dialog id="vision-dialog" class="popover">
-            <div id="vision-header" class="popover-header">
-                <h2>The Zero-Hunger Vision</h2>
-                <button onmouseover="crossHover('sign-in-button-cross')" onmouseout="crossReset('sign-in-button-cross')"
-                    onclick="hideDialog('vision-dialog')">
-                    <img id="sign-in-button-cross" src="./icon/cross.svg" alt="Cross button"
-                        onmouseover="crossHover('sign-in-button-cross')"
-                        onmouseout="crossReset('sign-in-button-cross')">
-                </button>
+            <div id="mission-vision-body" class="popover-body">
+                <p><strong>Mission: </strong>To provide a platform through which as many kind-hearted souls are willing
+                    can give to
+                    those in need of sustenance.</p>
+                <p><strong>Vision: </strong>A brotherly caring and sharing society in which no one has to go to bed
+                    hungry.</p>
             </div>
-            <div id="vision-body" class="popover-body"></div>
         </dialog>
         <dialog id="edit-dialog" class="popover">
             <div id="edit-header" class="popover-header">
@@ -262,20 +259,17 @@
         <ul>
             <li class="ul-header">Know more about us</li>
             <li onclick="showDialog('logo-dialog')"><a href="#">Our Logo</a></li>
-            <li onclick="showDialog('mission-dialog')"><a href="#">Our Mission</a></li>
-            <li onclick="showDialog('vision-dialog')"><a href="#">Our Vision</a></li>
+            <li onclick="showDialog('mission-vision-dialog')"><a href="#">Our Mission & Vision</a></li>
         </ul>
         <ul>
             <li class="ul-header">Take action</li>
+            <li><a href="donate.html">Donate</a></li>
             <li><a href="request.html">Receive</a></li>
         </ul>
         <ul>
             <li class="ul-header">Reach out to us</li>
             <li><a href=""><span class="icon-span"></span>Twitter</a></li>
             <li><a href=""><span class="icon-span"></span>Facebook</a></li>
-            <li><a href=""><span class="icon-span"></span>Instagram</a></li>
-            <li><a href=""><span class="icon-span"></span>YouTube</a></li>
-            <li><a href=""><span class="icon-span"></span>9gag</a></li>
         </ul>
     </div>
 
@@ -363,7 +357,7 @@
                 } else {
                     avatarSrc = currentUser.photoURL;
                 }
-                
+
 
                 if ((typeof (currentUser.displayName)) != "string") {
                     displayName = currentUser.email;
@@ -400,7 +394,7 @@
             }
         };
 
-        
+
         window.checkCurrentUser = checkCurrentUser;
         window.forceCurrentUser = forceCurrentUser;
         window.loadUserNav = loadUserNav;

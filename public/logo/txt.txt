@@ -1,9 +1,5 @@
 Example
 validation API
 
-OK ; Money/Donate ; Heart ; Receive ; Checkout ; Submit; Caution - Duplicate, Light/Dark, Password
-Socials - Facebook Instagram YouTube 9gag Twitter Google Email
-
-queryResultsDisplay, #request-results-wrapper, #no-results, 600{.popover, .popover-header, .popover-body>div, .popover-body-btn-wrapper, .popover-header h2}, #user-avatar-wrapper, Signed-In, .donation-card div, pendingUpdate(){button}
-
-#request-results-wrapper
+OK ; Money/Donate ; Heart ; Receive; Submit; Caution - Duplicate, Light/Dark, Password
+Socials - Facebook YouTube Twitter Gmail

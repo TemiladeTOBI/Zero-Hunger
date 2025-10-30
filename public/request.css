@@ -523,7 +523,7 @@ textarea:focus {
     }
 
     [class*="hero-form-wrapper"] {
-        gap: 0.5rem;
+        gap: 1rem;
     }
 
     [class*="hero-form-wrapper"] form {
@@ -544,12 +544,14 @@ textarea:focus {
 
     textarea {
         height: 5rem;
+        background-color: transparent;
     }
 
 
     /* Result Preview styling */
     #request-results {
-        width: 100%;
+        width: 95%;
+        margin: auto;
     }
 
     #request-results-wrapper {

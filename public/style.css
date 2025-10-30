@@ -20,6 +20,12 @@ body[class*="light"] {
     background-color: #ededed;
 }
 
+#theme-div {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 #theme-div div {
     position: relative;
     display: flex;
@@ -28,7 +34,7 @@ body[class*="light"] {
     width: 3rem;
     padding: 0.25rem;
     border: 2px solid hsl(225, 100%, 8%);
-    border-radius: 0.5rem;
+    border-radius: 5rem;
     cursor: pointer;
 }
 
@@ -40,7 +46,6 @@ body[class*="light"] {
     width: 3rem;
     padding: 0.25rem;
     border: 2px solid hsl(225, 100%, 8%);
-    border-radius: 0.5rem;
     cursor: pointer;
 }
 
@@ -50,7 +55,7 @@ body[class*="light"] {
     background-color: hsl(225, 100%, 18%);
     padding: 0.5rem;
     border: 2px solid hsl(202, 100%, 85%);
-    border-radius: 25%;
+    border-radius: 50%;
     box-shadow: 0 0 5px hsl(202, 100%, 85%);
     cursor: pointer;
 }
@@ -61,7 +66,6 @@ body[class*="light"] {
     background-color: hsl(0, 100%, 20%);
     padding: 0.5rem;
     border: 2px solid hsl(0, 100%, 80%);
-    border-radius: 25%;
     box-shadow: 0 0 5px hsl(0, 100%, 80%);
     cursor: pointer;
 }
@@ -185,6 +189,11 @@ body[class*="light"] {
     color: hsl(225, 100%, 18%);
     background-color: #00a1ffff;
     transition: 55ms;
+}
+
+#sign-in-button img {
+    width: 1rem;
+    height: auto;
 }
 
 .popunder span {
@@ -524,6 +533,7 @@ p {
 }
 
 .popover-full {
+    display: flex;
     transform: scale(1, 1);
 }
 
@@ -542,6 +552,7 @@ p {
     color: hsl(19, 100%, 50%);
     font-family: sans-serif;
     font-size: 2rem;
+    text-align: center;
 }
 
 .popover-header button {
@@ -602,7 +613,8 @@ p {
     outline: none;
 }
 
-#mission-body, #vision-body {
+#mission-body,
+#vision-body {
     padding: 1rem;
 }
 
@@ -640,10 +652,12 @@ p {
         opacity: 1;
         filter: grayscale(0.5);
     }
+
     50% {
         opacity: 0.5;
         filter: grayscale(1);
     }
+
     100% {
         opacity: 1;
         filter: grayscale(0.5);
@@ -814,9 +828,14 @@ p {
     width: 100%;
 }
 
-#logo-body-txt-wrapper strong {
+.popover strong {
     color: hsl(19, 100%, 50%);
-    margin-right: 1rem;
+    margin-right: 0.5rem;
+    font-size: 1.25rem;
+}
+
+#mission-vision-body {
+    padding: 1rem;
 }
 
 @keyframes popup {
@@ -874,7 +893,7 @@ footer {
     display: flex;
     justify-content: center;
     background-color: hsl(225, 100%, 18%);
-    padding: 1rem;
+    padding: 0.5rem;
 }
 
 @media only screen and (max-width: 992px) {
@@ -983,7 +1002,7 @@ footer {
     }
 
     #further {
-        padding: 2rem;
+        padding: 2rem 1rem;
     }
 }
 
@@ -1049,20 +1068,23 @@ footer {
     }
 
     p {
-        font-size: 1rem;
+        font-size: 1.25rem;
     }
 
     #hero-img-wrapper {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 100dvw;
+        width: 100%;
+        max-width: 80%;
+        height: auto;
         padding: 0;
+        margin: 1rem 0;
     }
 
     #donate {
         flex-direction: column;
-        padding: 1rem;
+        padding: 2rem 1rem;
     }
 
     #donate-img-wrapper {
@@ -1079,7 +1101,7 @@ footer {
 
     #receive {
         flex-direction: column-reverse;
-        padding: 1rem;
+        padding: 2rem 1rem;
     }
 
     #receive-img-wrapper {
