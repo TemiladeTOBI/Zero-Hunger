@@ -376,6 +376,10 @@ p {
     border-radius: 1rem;
 }
 
+#donate[class*="light"] img {
+    border-radius: 0.5rem;
+}
+
 #donate-img-wrapper {
     width: 100%;
 }
@@ -427,6 +431,10 @@ p {
     background-color: rgba(0, 40, 128, 0.85);
     margin: 2rem;
     border-radius: 1rem;
+}
+
+#receive[class*="light"] img {
+    border-radius: 0.5rem;
 }
 
 #receive-text-wrapper {
@@ -906,7 +914,8 @@ footer {
 
 @media only screen and (max-width: 992px) {
     #navbar {
-        padding: 0 0.25rem;
+        padding: 0 1rem;
+        position: relative;
     }
 
     #logo-wrapper img {
@@ -915,6 +924,78 @@ footer {
 
     .nav-link-wrapper {
         padding: 2rem 0.5rem;
+    }
+
+    /* Collapsible */
+    #trigger-div {
+        display: block;
+        position: relative;
+    }
+
+    #trigger-div button {
+        padding: 0.5rem;
+        background-color: transparent;
+        border: 2px solid hsl(202, 100%, 75%);
+        border-radius: 1rem;
+    }
+
+    #trigger-div button:hover,
+    #trigger-div button:focus {
+        border: 2px solid hsl(19, 100%, 50%);
+        transition: 250ms;
+    }
+
+    #trigger-badge {
+        position: absolute;
+        top: -10%;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.1rem;
+        height: 1.1rem;
+        border-radius: 50%;
+        background-color: hsl(0, 100%, 50%);
+        font-weight: 900;
+    }
+
+    #trigger-div button img {
+        max-width: 3rem;
+    }
+
+    #collapsible-wrapper {
+        display: none;
+        justify-content: space-around;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: hsl(225, 100%, 18%);
+    }
+
+    #hero-text-wrapper {
+        width: 100%;
+        padding: 0 2rem;
+    }
+
+    #donate-text-wrapper {
+        padding-right: 0;
+        width: 55%;
+    }
+
+    #receive-text-wrapper {
+        padding-left: 0;
+        width: 90%;
+    }
+
+    #button-div,
+    .button-div {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    #further {
+        padding: 1rem;
     }
 }
 
@@ -1096,7 +1177,7 @@ footer {
         padding: 2rem 1rem;
     }
 
-        #donate[class*="light"] {
+    #donate[class*="light"] {
         margin: 1rem;
         padding: 1rem;
     }

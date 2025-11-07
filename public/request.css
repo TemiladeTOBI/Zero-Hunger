@@ -452,6 +452,9 @@ textarea:focus {
     .requests-review {
         width: 60dvw;
     }
+    .request-sub-hero {
+        padding: 0.5rem;
+    }
 }
 
 @media only screen and (max-width: 768px) {
