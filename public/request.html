@@ -134,6 +134,7 @@
                 <div id="button-div">
                     <button id="search-btn" onclick="queryResultsUpdate()">Search</button>
                     <button id="reset-btn" onclick="formReset('#request-form')">Reset</button>
+                    <button class="show-all-btn" onclick="showAll()">Show All</button>
                 </div>
             </div>
         </div>
@@ -319,8 +320,11 @@
                 navLinkWrapper.innerHTML += `<div id="user-div" onmouseover="showPopunder('user-details-popunder')" onclick="showPopunder('user-details-popunder')">
                 <div id="user-details-popunder" class="popunder" onfocus="showPopunder('user-details-popunder')">
                     <p class="popunder-mail"><b>Email: </b>${currentUser.email}</p>
-                    <p class="popunder-out"><a href="#" onclick="hidePopunder('user-details-popunder')"">Close</a>
-                    <a href="#" onclick="signUserOut()">Sign Out</a></p>
+                    <p class="popunder-out"><span id="close-popunder-span"
+                                        onclick="hidePopunder('user-details-popunder')"><a href="#">Close</a><img src="./icon/cross[shrunk].svg" alt="Close Icon"></span>
+                                    <span id="sign-out-span" onclick="signUserOut()"><a href=" #">Sign Out</a><img
+                                            src="./icon/sign-out.svg" alt="Sign-Out Icon"></span>
+                                </p>
                 </div>
                 <div id="user-avatar-wrapper">
                     <img src="${avatarSrc}" alt="User Avatar">
@@ -336,7 +340,8 @@
 
                 // Load Sign-In/Log-In instead
                 navLinkWrapper.innerHTML += `<div id="sign-in-wrapper">
-                <button id="sign-in-button" onclick="showDialog('sign-up-dialog')">Sign In</button>
+                <button id="sign-in-button" onclick="showDialog('sign-up-dialog')">Sign In<span><img
+                                        src="./icon/sign-in.svg" alt=""></span></button>
             </div>`
             }
         };
@@ -492,6 +497,14 @@
             queryResultsDisplay(queryResults);  /* Display results */
         }
 
+        const showAll = () => { /* Show ALL available donations */
+            formReset('#request-form');
+
+            setTimeout(() => {
+                queryResultsUpdate();
+            }, 250);
+        }
+
         const addPendingRequest = (i) => {   /* Add selected donation to pending requests*/
             if (verifyPendingRequest(queryResults[i]) <= -1) {
                 pendingRequests.push(queryResults[i]);
@@ -585,6 +598,7 @@
         window.donationSearch = donationSearch;
         window.queryResultsDisplay = queryResultsDisplay;
         window.queryResultsUpdate = queryResultsUpdate;
+        window.showAll = showAll;
         window.addPendingRequest = addPendingRequest;
         window.submitPending = submitPending;
         window.succesfulUpdate = succesfulUpdate;

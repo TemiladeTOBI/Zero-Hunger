@@ -414,7 +414,7 @@ textarea:focus {
 
 @media only screen and (max-width: 600px) {
     .donations-review {
-        height: 70dvh;
+        height: 65dvh;
         width: 100dvw;
         padding: 0.5rem;
         gap: 0.5rem;

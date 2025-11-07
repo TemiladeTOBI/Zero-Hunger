@@ -364,6 +364,26 @@ textarea:focus {
     outline: none;
 }
 
+.show-all-btn {
+    padding: 0.75rem 1.5rem;
+    color: hsl(110, 100%, 50%);
+    background-color: transparent;
+    border: 2px hsl(110, 100%, 50%) solid;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: 500ms;
+}
+
+.show-all-btn:hover,
+.show-all-btn:focus {
+    color: hsl(225, 100%, 18%);
+    background-color: hsl(110, 100%, 50%);
+    transition: 55ms;
+    outline: none;
+}
+
 /* Result Preview styling */
 #request-results {
     width: 60%;
@@ -466,7 +486,7 @@ textarea:focus {
 
 @media only screen and (max-width: 600px) {
     .requests-review {
-        height: 70dvh;
+        height: 65dvh;
         width: 100dvw;
         left: 0;
         gap: 0;
@@ -559,6 +579,6 @@ textarea:focus {
     }
 
     #request-results-wrapper .request-card:first-of-type {
-    margin-top: 0;
-}
+        margin-top: 0;
+    }
 }
